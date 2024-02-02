@@ -64,18 +64,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": function() { return /* binding */ AppComponent; }
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ 71258);
-/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
-/* harmony import */ var _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/component-version/component-version.component */ 55963);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 71258);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var _service_population_data_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service/population-data.service */ 95207);
+/* harmony import */ var _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/component-version/component-version.component */ 55963);
+
 
 
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(activatedRoute, mPage) {
+    function AppComponent(activatedRoute, mPage, patientListDS) {
         this.activatedRoute = activatedRoute;
         this.mPage = mPage;
+        this.patientListDS = patientListDS;
     }
     AppComponent.prototype.ngOnInit = function () {
         // Grab any parameters in the URL (Used in Cerner Components)
@@ -89,16 +92,17 @@ var AppComponent = /** @class */ (function () {
         var _this = this;
         // Perform MPage Initialization
         setTimeout(function (e) {
-            _this.mPage.setMaxInstances(2, true, 'ORGA');
+            _this.mPage.setMaxInstances(2, true, 'ORGANIZATION');
             // Add your initialization code here - do not place outside setTimeout function
+            _this.patientListDS.loadPatientPopulation();
         }, 0);
     };
-    AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_2__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_3__.mPageService)); };
-    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 3, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](0, "Covenant ACH Patient List\n");
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](1, "mpage-log-component");
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](2, "app-component-version");
-        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_3__.mPageLogComponent, _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_0__.ComponentVersionComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
+    AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
+    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 3, vars: 0, template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](0, "Covenant ACH Patient List\n");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](1, "mpage-log-component");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "app-component-version");
+        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.mPageLogComponent, _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_1__.ComponentVersionComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
     return AppComponent;
 }());
 
@@ -218,6 +222,50 @@ var ComponentVersionComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("v", ctx.currentApplicationVersion, "");
         } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb21wb25lbnQtdmVyc2lvbi5jb21wb25lbnQuc2NzcyJ9 */"] });
     return ComponentVersionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ 95207:
+/*!****************************************************!*\
+  !*** ./src/app/service/population-data.service.ts ***!
+  \****************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PopulationDataService": function() { return /* binding */ PopulationDataService; }
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+
+
+var PopulationDataService = /** @class */ (function () {
+    function PopulationDataService(populationData) {
+        this.populationData = populationData;
+        this.loading_population = false;
+    }
+    PopulationDataService.prototype.loadPatientPopulation = function () {
+        var _this = this;
+        this.loading_population = true;
+        this.populationData.load({
+            customScript: {
+                script: [
+                    {
+                        name: '1cov_base_development_01:group1',
+                        run: 'pre',
+                        id: 'patient_population'
+                    }
+                ]
+            }
+        }, undefined, (function () { _this.loading_population = false; }));
+    };
+    PopulationDataService.ɵfac = function PopulationDataService_Factory(t) { return new (t || PopulationDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_1__.CustomService)); };
+    PopulationDataService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: PopulationDataService, factory: PopulationDataService.ɵfac, providedIn: 'root' });
+    return PopulationDataService;
 }());
 
 
