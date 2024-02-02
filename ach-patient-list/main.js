@@ -64,24 +64,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppComponent": function() { return /* binding */ AppComponent; }
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ 71258);
-/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ 71258);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
 /* harmony import */ var _service_population_data_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./service/population-data.service */ 95207);
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/common */ 54364);
 /* harmony import */ var _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/component-version/component-version.component */ 55963);
+/* harmony import */ var _components_patient_table_patient_table_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/patient-table/patient-table.component */ 43555);
 
 
 
 
 
-function AppComponent_ng_container_1_Template(rf, ctx) { if (rf & 1) {
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerStart"](0);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](1, "mpage-table", 1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementContainerEnd"]();
-} if (rf & 2) {
-    var ctx_r0 = _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵnextContext"]();
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("tableData", ctx_r0.patientListDS.patientlist);
+
+
+function AppComponent_app_patient_table_1_Template(rf, ctx) { if (rf & 1) {
+    _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "app-patient-table");
 } }
 var AppComponent = /** @class */ (function () {
     function AppComponent(activatedRoute, mPage, patientListDS) {
@@ -106,16 +104,16 @@ var AppComponent = /** @class */ (function () {
             _this.patientListDS.loadPatientPopulation();
         }, 0);
     };
-    AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_3__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
-    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 4, vars: 1, consts: [[4, "ngif"], [3, "tableData"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](0, "Covenant ACH Patient List\n");
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtemplate"](1, AppComponent_ng_container_1_Template, 2, 1, "ng-container", 0);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](2, "mpage-log-component");
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](3, "app-component-version");
+    AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
+    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 4, vars: 1, consts: [[4, "ngIf"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](0, "Covenant ACH Patient List\n");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](1, AppComponent_app_patient_table_1_Template, 1, 0, "app-patient-table", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](2, "mpage-log-component");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](3, "app-component-version");
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngif", ctx.patientlistDS.patientlistLoaded);
-        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.mPageLogComponent, _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_1__.ComponentVersionComponent, _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.MpageTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.patientListDS.patientlistLoaded);
+        } }, directives: [_angular_common__WEBPACK_IMPORTED_MODULE_6__.NgIf, _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.mPageLogComponent, _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_1__.ComponentVersionComponent, _components_patient_table_patient_table_component__WEBPACK_IMPORTED_MODULE_2__.PatientTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJhcHAuY29tcG9uZW50LnNjc3MifQ== */"] });
     return AppComponent;
 }());
 
@@ -134,16 +132,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "AppModule": function() { return /* binding */ AppModule; }
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
-/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser/animations */ 20718);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 1707);
-/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ 71570);
+/* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/platform-browser/animations */ 20718);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 90158);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 55041);
-/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material-moment-adapter */ 63737);
-/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/core */ 32220);
+/* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material-moment-adapter */ 63737);
+/* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/core */ 32220);
 /* harmony import */ var _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/component-version/component-version.component */ 55963);
+/* harmony import */ var _components_patient_table_patient_table_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/patient-table/patient-table.component */ 43555);
+
 
 
 
@@ -161,12 +161,12 @@ var AppModule = /** @class */ (function () {
     function AppModule() {
     }
     AppModule.ɵfac = function AppModule_Factory(t) { return new (t || AppModule)(); };
-    AppModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent] });
-    AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineInjector"]({ providers: [
-            { provide: _angular_core__WEBPACK_IMPORTED_MODULE_3__.ErrorHandler, useClass: _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.ErrorHandlerService },
-            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_5__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_6__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_5__.MAT_DATE_LOCALE] },
+    AppModule.ɵmod = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineNgModule"]({ type: AppModule, bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent] });
+    AppModule.ɵinj = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵdefineInjector"]({ providers: [
+            { provide: _angular_core__WEBPACK_IMPORTED_MODULE_4__.ErrorHandler, useClass: _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.ErrorHandlerService },
+            { provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_6__.DateAdapter, useClass: _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MomentDateAdapter, deps: [_angular_material_core__WEBPACK_IMPORTED_MODULE_6__.MAT_DATE_LOCALE] },
             {
-                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_5__.MAT_DATE_FORMATS, useValue: {
+                provide: _angular_material_core__WEBPACK_IMPORTED_MODULE_6__.MAT_DATE_FORMATS, useValue: {
                     parse: {
                         dateInput: ['l', 'LL'],
                     },
@@ -179,27 +179,28 @@ var AppModule = /** @class */ (function () {
                 }
             }
         ], imports: [[
-                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.BrowserModule,
-                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__.NoopAnimationsModule,
-                _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.ClinicalOfficeMpageModule,
-                _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.MaterialModule,
+                _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.BrowserModule,
+                _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__.NoopAnimationsModule,
+                _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.ClinicalOfficeMpageModule,
+                _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.MaterialModule,
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-                _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule,
-                _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_6__.MatMomentDateModule
+                _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
+                _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+                _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule
             ]] });
     return AppModule;
 }());
 
-(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent,
-        _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_2__.ComponentVersionComponent], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__.BrowserModule,
-        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_8__.NoopAnimationsModule,
-        _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.ClinicalOfficeMpageModule,
-        _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.MaterialModule,
+(function () { (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_4__["ɵɵsetNgModuleScope"](AppModule, { declarations: [_app_component__WEBPACK_IMPORTED_MODULE_1__.AppComponent,
+        _components_component_version_component_version_component__WEBPACK_IMPORTED_MODULE_2__.ComponentVersionComponent,
+        _components_patient_table_patient_table_component__WEBPACK_IMPORTED_MODULE_3__.PatientTableComponent], imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__.BrowserModule,
+        _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_9__.NoopAnimationsModule,
+        _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.ClinicalOfficeMpageModule,
+        _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.MaterialModule,
         _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_9__.FormsModule,
-        _angular_forms__WEBPACK_IMPORTED_MODULE_9__.ReactiveFormsModule,
-        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_6__.MatMomentDateModule] }); })();
+        _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
+        _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
+        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule] }); })();
 
 
 /***/ }),
@@ -235,6 +236,42 @@ var ComponentVersionComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"]("v", ctx.currentApplicationVersion, "");
         } }, styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJjb21wb25lbnQtdmVyc2lvbi5jb21wb25lbnQuc2NzcyJ9 */"] });
     return ComponentVersionComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ 43555:
+/*!*********************************************************************!*\
+  !*** ./src/app/components/patient-table/patient-table.component.ts ***!
+  \*********************************************************************/
+/***/ (function(__unused_webpack_module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PatientTableComponent": function() { return /* binding */ PatientTableComponent; }
+/* harmony export */ });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var src_app_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! src/app/service/population-data.service */ 95207);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+
+
+
+var PatientTableComponent = /** @class */ (function () {
+    function PatientTableComponent(patientListDS) {
+        this.patientListDS = patientListDS;
+    }
+    PatientTableComponent.prototype.ngOnInit = function () {
+    };
+    PatientTableComponent.ɵfac = function PatientTableComponent_Factory(t) { return new (t || PatientTableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
+    PatientTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: PatientTableComponent, selectors: [["app-patient-table"]], decls: 1, vars: 1, consts: [[3, "tableData"]], template: function PatientTableComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "mpage-table", 0);
+        } if (rf & 2) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("tableData", ctx.patientListDS.patientlist);
+        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.MpageTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwYXRpZW50LXRhYmxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
+    return PatientTableComponent;
 }());
 
 
@@ -676,7 +713,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.4","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.5","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
 
 /***/ })
 
