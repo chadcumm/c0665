@@ -259,9 +259,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var _c0 = function () { return { icon: "content_cut", label: "Update Status" }; };
-var _c1 = function () { return { icon: "content_copy", label: "Add Note" }; };
+var _c0 = function () { return { label: "Update Status" }; };
+var _c1 = function () { return { label: "Add Note" }; };
 var _c2 = function (a0, a1) { return [a0, a1]; };
+var _c3 = function () { return { paginator: false, columnFilter: true }; };
 var PatientTableComponent = /** @class */ (function () {
     function PatientTableComponent(patientListDS) {
         this.patientListDS = patientListDS;
@@ -269,10 +270,10 @@ var PatientTableComponent = /** @class */ (function () {
     PatientTableComponent.prototype.ngOnInit = function () {
     };
     PatientTableComponent.ɵfac = function PatientTableComponent_Factory(t) { return new (t || PatientTableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](src_app_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
-    PatientTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: PatientTableComponent, selectors: [["app-patient-table"]], decls: 1, vars: 8, consts: [[3, "tableData", "toolbar", "contextMenu"]], template: function PatientTableComponent_Template(rf, ctx) { if (rf & 1) {
+    PatientTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: PatientTableComponent, selectors: [["app-patient-table"]], decls: 1, vars: 10, consts: [[3, "tableData", "toolbar", "contextMenu", "params"]], template: function PatientTableComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "mpage-table", 0);
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("tableData", ctx.patientListDS.patientlist)("toolbar", true)("contextMenu", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction2"](5, _c2, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](3, _c0), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](4, _c1)));
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("tableData", ctx.patientListDS.patientlist)("toolbar", true)("contextMenu", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction2"](6, _c2, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](4, _c0), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](5, _c1)))("params", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](9, _c3));
         } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.MpageTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwYXRpZW50LXRhYmxlLmNvbXBvbmVudC5zY3NzIn0= */"] });
     return PatientTableComponent;
 }());
@@ -708,7 +709,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.8","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.56","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.9","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.56","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
 
 /***/ })
 
