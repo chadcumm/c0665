@@ -87,7 +87,7 @@ var AppComponent = /** @class */ (function () {
         });
         // Perform MPage Initialization
         setTimeout(function (e) {
-            _this.mPage.setMaxInstances(2, true, 'CHART');
+            _this.mPage.setMaxInstances(2, true, 'ORGANIZATION');
             // Add your initialization code here - do not place outside setTimeout function
         }, 0);
     };
