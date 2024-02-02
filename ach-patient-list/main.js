@@ -255,11 +255,20 @@ var PopulationDataService = /** @class */ (function () {
             customScript: {
                 script: [
                     {
-                        name: '1cov_base_development_01:group1',
+                        name: '1co_mpage_census_list:group1',
                         run: 'pre',
                         id: 'patient_population'
                     }
-                ]
+                ],
+                clearPatientList: true
+            },
+            person: {
+                patient: true,
+                prsnlReltn: true
+            },
+            encounter: {
+                aliases: true,
+                prsnlReltn: true
             }
         }, undefined, (function () { _this.loading_population = false; }));
     };
