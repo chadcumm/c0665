@@ -78,12 +78,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function AppComponent_ng_container_5_Template(rf, ctx) { if (rf & 1) {
+function AppComponent_ng_container_4_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerStart"](0);
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtext"](1, "Patient Population List Loading...please wait.");
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementContainerEnd"]();
 } }
-function AppComponent_app_patient_table_6_Template(rf, ctx) { if (rf & 1) {
+function AppComponent_app_patient_table_5_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "app-patient-table");
 } }
 var AppComponent = /** @class */ (function () {
@@ -105,25 +105,31 @@ var AppComponent = /** @class */ (function () {
         // Perform MPage Initialization
         setTimeout(function (e) {
             _this.mPage.setMaxInstances(2, true, 'ORGANIZATION');
+            console.log('MPage Initialized');
+            console.log('MPage Service:', _this.mPage);
+            console.log('Mpage Service: inMpage: ', _this.mPage.inMpage);
             // Add your initialization code here - do not place outside setTimeout function
-            _this.patientListDS.loadPatientPopulation();
+            if (_this.mPage.inMpage === true) {
+                _this.patientListDS.loadPatientPopulation();
+            }
+            else {
+                _this.patientListDS.loadLocalPatientPopulation();
+            }
         }, 0);
     };
     AppComponent.ɵfac = function AppComponent_Factory(t) { return new (t || AppComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_angular_router__WEBPACK_IMPORTED_MODULE_4__.ActivatedRoute), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_5__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdirectiveInject"](_service_population_data_service__WEBPACK_IMPORTED_MODULE_0__.PopulationDataService)); };
-    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 8, vars: 2, consts: [[2, "width", "100%"], [4, "ngIf"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "table", 0);
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "tr");
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](2, "td");
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](3, "td");
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](4, "app-component-version");
+    AppComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵdefineComponent"]({ type: AppComponent, selectors: [["app-root"]], decls: 7, vars: 2, consts: [[2, "width", "100%"], [4, "ngIf"]], template: function AppComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](0, "app-component-version");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](1, "table", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](2, "tr");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](3, "td");
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementEnd"]();
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](5, AppComponent_ng_container_5_Template, 2, 0, "ng-container", 1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](6, AppComponent_app_patient_table_6_Template, 1, 0, "app-patient-table", 1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](7, "mpage-log-component");
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](4, AppComponent_ng_container_4_Template, 2, 0, "ng-container", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵtemplate"](5, AppComponent_app_patient_table_5_Template, 1, 0, "app-patient-table", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelement"](6, "mpage-log-component");
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](4);
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", !ctx.patientListDS.patientlistLoaded);
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](1);
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngIf", ctx.patientListDS.patientlistLoaded);
@@ -308,18 +314,41 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PopulationDataService": function() { return /* binding */ PopulationDataService; }
 /* harmony export */ });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ 2316);
-/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! rxjs/operators */ 33927);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 53882);
+
+
 
 
 var PopulationDataService = /** @class */ (function () {
-    function PopulationDataService(populationData) {
+    function PopulationDataService(populationData, mPage, http) {
         this.populationData = populationData;
+        this.mPage = mPage;
+        this.http = http;
         this.loading_population = false;
+        // moving to NgOnInit 
+        //this.loadLocalPatientPopulation();
     }
+    PopulationDataService.prototype.ngOnInit = function () {
+        // moved to app.component.ts ngoninit
+        /*
+        if (this.mPage.inMpage === false) {
+          this.loadLocalPatientPopulation();
+        }
+        */
+    };
     Object.defineProperty(PopulationDataService.prototype, "patientlist", {
         get: function () {
-            return this.populationData.get('patient_population').visits;
+            var _a, _b;
+            if (this.mPage.inMpage === true) {
+                return this.populationData.get('patient_population').visits;
+            }
+            else {
+                console.log('patientlist:', this.localJSONData);
+                return ((_b = (_a = this.localJSONData) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.visits) || [];
+            }
         },
         enumerable: false,
         configurable: true
@@ -327,7 +356,12 @@ var PopulationDataService = /** @class */ (function () {
     Object.defineProperty(PopulationDataService.prototype, "patientlistLoaded", {
         // Determine if patients have been loaded
         get: function () {
-            return this.populationData.isLoaded('patient_population');
+            if (this.mPage.inMpage === true) {
+                return this.populationData.isLoaded('patient_population');
+            }
+            else {
+                return !!this.localJSONData;
+            }
         },
         enumerable: false,
         configurable: true
@@ -348,8 +382,23 @@ var PopulationDataService = /** @class */ (function () {
             }
         }, undefined, (function () { _this.loading_population = false; }));
     };
-    PopulationDataService.ɵfac = function PopulationDataService_Factory(t) { return new (t || PopulationDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_1__.CustomService)); };
-    PopulationDataService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"]({ token: PopulationDataService, factory: PopulationDataService.ɵfac, providedIn: 'root' });
+    // load the patient data from a local JSON file.  Useful when doing offline development.  Add the json to a patient_population.json file in the assests/data folder
+    // and then run the util/scramle_data.js to scramble the data and create a scrambled_patient_population.json file. Delete the patient_population.json file.
+    PopulationDataService.prototype.loadLocalPatientPopulation = function () {
+        var _this = this;
+        this.loading_population = true;
+        this.http.get('assets/data/scrambled_patient_population.json', { responseType: 'text' })
+            .pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_0__.map)(function (response) { return JSON.parse(response); }))
+            .subscribe(function (data) {
+            _this.localJSONData = [data];
+            _this.loading_population = false;
+        }, function (error) {
+            console.error('Error loading patient population:', error);
+            _this.loading_population = false;
+        });
+    };
+    PopulationDataService.ɵfac = function PopulationDataService_Factory(t) { return new (t || PopulationDataService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.CustomService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient)); };
+    PopulationDataService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: PopulationDataService, factory: PopulationDataService.ɵfac, providedIn: 'root' });
     return PopulationDataService;
 }());
 
@@ -724,7 +773,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.13","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.56","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"ach-patient-list","version":"0.0.15","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.56","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.55","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
 
 /***/ })
 
