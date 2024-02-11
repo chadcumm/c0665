@@ -342,7 +342,7 @@ var ProblemListService = /** @class */ (function () {
             var _a, _b;
             var user = 0;
             if (this.mPage.inMpage === true) {
-                user = this.problemListDS.get('problemdata').userID;
+                user = this.problemListDS.get('problemdata').userId;
             }
             else {
                 user = ((_b = (_a = this.localJSONData) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.userId) || '';
