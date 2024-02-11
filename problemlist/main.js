@@ -300,6 +300,7 @@ var ProblemListService = /** @class */ (function () {
         this.mPage = mPage;
         this.http = http;
         this.MyProblems = true;
+        this.ActiveProblemsOnly = true;
         this.loading_data = false;
     }
     ProblemListService.prototype.loadProblems = function () {
@@ -400,9 +401,20 @@ var ProblemListService = /** @class */ (function () {
         this.MyProblems = !this.MyProblems;
         this.mPage.putLog('toggleMyProblems this.MyProblems: ' + this.MyProblems);
     };
+    ProblemListService.prototype.toggleActiveProblems = function () {
+        this.ActiveProblemsOnly = !this.ActiveProblemsOnly;
+        this.mPage.putLog('toggleActiveProblems this.ActiveProblemsOnly: ' + this.ActiveProblemsOnly);
+    };
     Object.defineProperty(ProblemListService.prototype, "isToggleSelected", {
         get: function () {
             return this.MyProblems;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ProblemListService.prototype, "isToggleActiveSelected", {
+        get: function () {
+            return this.ActiveProblemsOnly;
         },
         enumerable: false,
         configurable: true
@@ -448,21 +460,37 @@ var TopbarComponent = /** @class */ (function () {
     TopbarComponent.prototype.ngOnInit = function () {
     };
     TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService)); };
-    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 6, vars: 3, consts: [[3, "ngModel", "change"], [1, "spacer", 2, "width", "100%"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
+    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 11, vars: 6, consts: [[2, "display", "flex", "justify-content", "space-between", "width", "100%"], [2, "width", "200px"], [3, "ngModel", "change"], [2, "flex-grow", "1"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-toolbar");
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "mat-slide-toggle", 0);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("change", function TopbarComponent_Template_mat_slide_toggle_change_1_listener() { return ctx.problemListDS.toggleMyProblems(); });
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](2, " My Problems Only ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](2, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](3, "mat-slide-toggle", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("change", function TopbarComponent_Template_mat_slide_toggle_change_3_listener() { return ctx.problemListDS.toggleMyProblems(); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](4);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](3, "span", 1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "span", 2);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](5, "div", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](6, "mat-slide-toggle", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("change", function TopbarComponent_Template_mat_slide_toggle_change_6_listener() { return ctx.problemListDS.toggleActiveProblems(); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](7);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](8, "div", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](9, "div", 4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](10);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleSelected);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleSelected ? "My Problems Only" : "Showing All Providers", " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleActiveSelected);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleActiveSelected ? "Active Only" : "Showing All Problems", " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate2"](" v", ctx.currentApplicationVersion, ";", ctx.problemListDS.userID, " ");
         } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__.MatToolbar, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n\n.mat-toolbar[_ngcontent-%COMP%] {\n  height: 40px;\n  \n  display: flex;\n  \n  align-items: center;\n  \n  justify-content: space-between;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQjs7QUFBQTtFQUNJLFlBQUE7RUFBYyw2Q0FBQTtFQUNkLGFBQUE7RUFBZSxnQkFBQTtFQUNmLG1CQUFBO0VBQXFCLDRCQUFBO0VBQ3JCLDhCQUFBO0VBQWdDLDRCQUFBO0FBT3BDIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnRvb2xiYXIge1xuICAgIGZvbnQtc2l6ZTogMC44cmVtO1xufVxuLmFsaWduLXJpZ2h0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cblxuICAuc2VsZWN0ZWQge1xuICAgIGNvbG9yOiByZWQ7IC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGRlc2lyZWQgc3R5bGluZyBmb3IgdGhlIHNlbGVjdGVkIG1hdC1pY29uXG59XG5cbi5tYXQtYnV0dG9uLXRvZ2dsZS1jaGVja2VkIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1OyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbiAgICBjb2xvcjogd2hpdGU7IC8qIENoYW5nZSB0aGlzIHRvIHRoZSBjb2xvciB5b3Ugd2FudCBmb3IgdGhlIHRleHQvaWNvbiB3aGVuIHRoZSBidXR0b24gaXMgcHJlc3NlZCAqL1xufVxuXG4ubWF0LXRvb2xiYXIge1xuICAgIGhlaWdodDogNDBweDsgLyogQWRqdXN0IHRoaXMgdmFsdWUgdG8geW91ciBkZXNpcmVkIGhlaWdodCAqL1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIFVzZSBGbGV4Ym94ICovXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjsgLyogQ2VudGVyIGl0ZW1zIHZlcnRpY2FsbHkgKi9cbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8qIERpc3RyaWJ1dGUgaXRlbXMgZXZlbmx5ICovXG59XG4iXX0= */"] });
     return TopbarComponent;
@@ -835,7 +863,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.31","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.32","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
