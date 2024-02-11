@@ -257,12 +257,22 @@ var _c2 = function () { return { icon: "content_copy", label: "Copy" }; };
 var _c3 = function () { return { icon: "content_copy", label: "Paste" }; };
 var _c4 = function (a0, a1, a2) { return [a0, a1, a2]; };
 var ProblemListTableComponent = /** @class */ (function () {
-    function ProblemListTableComponent(problemDS) {
+    function ProblemListTableComponent(problemDS, cdr) {
         this.problemDS = problemDS;
+        this.cdr = cdr;
     }
+    ProblemListTableComponent.prototype.ngDoCheck = function () {
+        var _this = this;
+        if (this.problemDS.refreshed_data) {
+            setTimeout(function () {
+                _this.problemDS.refreshed_data = false;
+            });
+            this.cdr.detectChanges();
+        }
+    };
     ProblemListTableComponent.prototype.ngOnInit = function () {
     };
-    ProblemListTableComponent.ɵfac = function ProblemListTableComponent_Factory(t) { return new (t || ProblemListTableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_0__.ProblemListService)); };
+    ProblemListTableComponent.ɵfac = function ProblemListTableComponent_Factory(t) { return new (t || ProblemListTableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_0__.ProblemListService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_1__.ChangeDetectorRef)); };
     ProblemListTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ProblemListTableComponent, selectors: [["app-problem-list-table"]], decls: 1, vars: 13, consts: [[3, "tableData", "columnConfig", "toolbar", "params", "contextMenu", "columnConfigChange"]], template: function ProblemListTableComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mpage-table", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("columnConfigChange", function ProblemListTableComponent_Template_mpage_table_columnConfigChange_0_listener($event) { return ctx.problemDS.columnConfigProblemList = $event; });
@@ -306,9 +316,8 @@ var ProblemListService = /** @class */ (function () {
         this._snackBar = _snackBar;
         this.columnConfigProblemList = { columns: [], columnSort: [], freezeLeft: 0 };
         this.problemViewPrefs = { MyProblems: true, ActiveProblemsOnly: true };
-        this.MyProblems = true;
-        this.ActiveProblemsOnly = true;
         this.loading_data = false;
+        this.refreshed_data = false;
     }
     ProblemListService.prototype.loadProblems = function () {
         var _this = this;
@@ -325,7 +334,8 @@ var ProblemListService = /** @class */ (function () {
             }
         }, undefined, (function () {
             _this.loading_data = false;
-            _this.mPage.putLog('Problem Data Loaded');
+            _this.refreshed_data = true;
+            _this.mPage.putLog('Problem Data Loaded and Refreshed');
         }));
     };
     // Load user preferences
@@ -928,7 +938,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.40","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.41","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
