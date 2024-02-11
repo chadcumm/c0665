@@ -504,11 +504,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _problem_list_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../problem-list.service */ 39650);
 /* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/snack-bar */ 68456);
-/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/toolbar */ 64106);
-/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/button */ 70781);
-/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/icon */ 52529);
-/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/toolbar */ 64106);
+/* harmony import */ var _angular_material_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/button */ 70781);
+/* harmony import */ var _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material/icon */ 52529);
+/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/forms */ 1707);
+
 
 
 
@@ -519,14 +521,26 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TopbarComponent = /** @class */ (function () {
-    function TopbarComponent(problemListDS, _snackBar) {
+    function TopbarComponent(problemListDS, _snackBar, cdr, mPage) {
         this.problemListDS = problemListDS;
         this._snackBar = _snackBar;
+        this.cdr = cdr;
+        this.mPage = mPage;
         this.currentApplicationVersion = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.appVersion;
     }
+    TopbarComponent.prototype.ngDoCheck = function () {
+        var _this = this;
+        if (this.problemListDS.refreshed_data === true) {
+            setTimeout(function () {
+                _this.problemListDS.refreshed_data = false;
+                _this.mPage.putLog('Problem Table Refreshed-TopBar:ngDoCheck');
+                _this.cdr.detectChanges();
+            });
+        }
+    };
     TopbarComponent.prototype.ngOnInit = function () {
     };
-    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__.MatSnackBar)); };
+    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__.MatSnackBar), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_2__.ChangeDetectorRef), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_4__.mPageService)); };
     TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 15, vars: 6, consts: [[2, "display", "flex", "justify-content", "space-between", "width", "100%"], [2, "width", "50px"], ["mat-icon-button", "", "title", "Save user preferences", 3, "click"], [2, "width", "200px"], [3, "ngModel", "change"], [2, "flex-grow", "1"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-toolbar");
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 0);
@@ -567,7 +581,7 @@ var TopbarComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleActiveSelected ? "Active Only" : "Showing All Problems", " ");
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate2"](" v", ctx.currentApplicationVersion, ";", ctx.problemListDS.userID, " ");
-        } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__.MatToolbar, _angular_material_button__WEBPACK_IMPORTED_MODULE_5__.MatButton, _angular_material_icon__WEBPACK_IMPORTED_MODULE_6__.MatIcon, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_7__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_8__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n\n.mat-toolbar[_ngcontent-%COMP%] {\n  height: 40px;\n  \n  display: flex;\n  \n  align-items: center;\n  \n  justify-content: space-between;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQjs7QUFBQTtFQUNJLFlBQUE7RUFBYyw2Q0FBQTtFQUNkLGFBQUE7RUFBZSxnQkFBQTtFQUNmLG1CQUFBO0VBQXFCLDRCQUFBO0VBQ3JCLDhCQUFBO0VBQWdDLDRCQUFBO0FBT3BDIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnRvb2xiYXIge1xuICAgIGZvbnQtc2l6ZTogMC44cmVtO1xufVxuLmFsaWduLXJpZ2h0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cblxuICAuc2VsZWN0ZWQge1xuICAgIGNvbG9yOiByZWQ7IC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGRlc2lyZWQgc3R5bGluZyBmb3IgdGhlIHNlbGVjdGVkIG1hdC1pY29uXG59XG5cbi5tYXQtYnV0dG9uLXRvZ2dsZS1jaGVja2VkIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1OyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbiAgICBjb2xvcjogd2hpdGU7IC8qIENoYW5nZSB0aGlzIHRvIHRoZSBjb2xvciB5b3Ugd2FudCBmb3IgdGhlIHRleHQvaWNvbiB3aGVuIHRoZSBidXR0b24gaXMgcHJlc3NlZCAqL1xufVxuXG4ubWF0LXRvb2xiYXIge1xuICAgIGhlaWdodDogNDBweDsgLyogQWRqdXN0IHRoaXMgdmFsdWUgdG8geW91ciBkZXNpcmVkIGhlaWdodCAqL1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIFVzZSBGbGV4Ym94ICovXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjsgLyogQ2VudGVyIGl0ZW1zIHZlcnRpY2FsbHkgKi9cbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8qIERpc3RyaWJ1dGUgaXRlbXMgZXZlbmx5ICovXG59XG4iXX0= */"], changeDetection: 0 });
+        } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_5__.MatToolbar, _angular_material_button__WEBPACK_IMPORTED_MODULE_6__.MatButton, _angular_material_icon__WEBPACK_IMPORTED_MODULE_7__.MatIcon, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_8__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_9__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n\n.mat-toolbar[_ngcontent-%COMP%] {\n  height: 40px;\n  \n  display: flex;\n  \n  align-items: center;\n  \n  justify-content: space-between;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQjs7QUFBQTtFQUNJLFlBQUE7RUFBYyw2Q0FBQTtFQUNkLGFBQUE7RUFBZSxnQkFBQTtFQUNmLG1CQUFBO0VBQXFCLDRCQUFBO0VBQ3JCLDhCQUFBO0VBQWdDLDRCQUFBO0FBT3BDIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnRvb2xiYXIge1xuICAgIGZvbnQtc2l6ZTogMC44cmVtO1xufVxuLmFsaWduLXJpZ2h0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cblxuICAuc2VsZWN0ZWQge1xuICAgIGNvbG9yOiByZWQ7IC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGRlc2lyZWQgc3R5bGluZyBmb3IgdGhlIHNlbGVjdGVkIG1hdC1pY29uXG59XG5cbi5tYXQtYnV0dG9uLXRvZ2dsZS1jaGVja2VkIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1OyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbiAgICBjb2xvcjogd2hpdGU7IC8qIENoYW5nZSB0aGlzIHRvIHRoZSBjb2xvciB5b3Ugd2FudCBmb3IgdGhlIHRleHQvaWNvbiB3aGVuIHRoZSBidXR0b24gaXMgcHJlc3NlZCAqL1xufVxuXG4ubWF0LXRvb2xiYXIge1xuICAgIGhlaWdodDogNDBweDsgLyogQWRqdXN0IHRoaXMgdmFsdWUgdG8geW91ciBkZXNpcmVkIGhlaWdodCAqL1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIFVzZSBGbGV4Ym94ICovXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjsgLyogQ2VudGVyIGl0ZW1zIHZlcnRpY2FsbHkgKi9cbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8qIERpc3RyaWJ1dGUgaXRlbXMgZXZlbmx5ICovXG59XG4iXX0= */"], changeDetection: 0 });
     return TopbarComponent;
 }());
 
@@ -938,7 +952,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.41","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.42","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
