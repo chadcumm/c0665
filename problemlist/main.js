@@ -119,7 +119,7 @@ var AppComponent = /** @class */ (function () {
             console.log('Mpage Service: inMpage: ', _this.mPage.inMpage);
             // Add your initialization code here - do not place outside setTimeout function
             if (_this.mPage.inMpage === true) {
-                _this.problemDS.loadProblems();
+                _this.problemDS.loadPreferences();
             }
             else {
                 _this.problemDS.localLoadProblems();
@@ -263,11 +263,13 @@ var ProblemListTableComponent = /** @class */ (function () {
     ProblemListTableComponent.prototype.ngOnInit = function () {
     };
     ProblemListTableComponent.ɵfac = function ProblemListTableComponent_Factory(t) { return new (t || ProblemListTableComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_0__.ProblemListService)); };
-    ProblemListTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ProblemListTableComponent, selectors: [["app-problem-list-table"]], decls: 1, vars: 12, consts: [[3, "tableData", "toolbar", "params", "contextMenu"]], template: function ProblemListTableComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelement"](0, "mpage-table", 0);
+    ProblemListTableComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: ProblemListTableComponent, selectors: [["app-problem-list-table"]], decls: 1, vars: 13, consts: [[3, "tableData", "columnConfig", "toolbar", "params", "contextMenu", "columnConfigChange"]], template: function ProblemListTableComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "mpage-table", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵlistener"]("columnConfigChange", function ProblemListTableComponent_Template_mpage_table_columnConfigChange_0_listener($event) { return ctx.problemDS.columnConfigProblemList = $event; });
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("tableData", ctx.problemDS.problems)("toolbar", false)("params", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](4, _c0))("contextMenu", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction3"](8, _c4, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](5, _c1), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](6, _c2), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](7, _c3)));
-        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.MpageTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9ibGVtLWxpc3QtdGFibGUuY29tcG9uZW50LnNjc3MifQ== */"] });
+            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵproperty"]("tableData", ctx.problemDS.problems)("columnConfig", ctx.problemDS.columnConfigProblemList)("toolbar", false)("params", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](5, _c0))("contextMenu", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction3"](9, _c4, _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](6, _c1), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](7, _c2), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵpureFunction0"](8, _c3)));
+        } }, directives: [_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.MpageTableComponent], styles: ["\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJwcm9ibGVtLWxpc3QtdGFibGUuY29tcG9uZW50LnNjc3MifQ== */"], changeDetection: 0 });
     return ProblemListTableComponent;
 }());
 
@@ -290,15 +292,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @clinicaloffice/clinical-office-mpage */ 2029);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ 53882);
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/snack-bar */ 68456);
+
 
 
 
 
 var ProblemListService = /** @class */ (function () {
-    function ProblemListService(problemListDS, mPage, http) {
+    function ProblemListService(problemListDS, mPage, http, _snackBar) {
         this.problemListDS = problemListDS;
         this.mPage = mPage;
         this.http = http;
+        this._snackBar = _snackBar;
+        this.columnConfigProblemList = { columns: [], columnSort: [], freezeLeft: 0 };
         this.MyProblems = true;
         this.ActiveProblemsOnly = true;
         this.loading_data = false;
@@ -320,6 +326,48 @@ var ProblemListService = /** @class */ (function () {
             _this.loading_data = false;
             _this.mPage.putLog('Problem Data Loaded');
         }));
+    };
+    // Load user preferences
+    ProblemListService.prototype.loadPreferences = function () {
+        var _this = this;
+        this.loading_data = true;
+        var prefMessage = this.problemListDS.emptyDmInfo;
+        prefMessage.infoDomain = 'COV Problem List Preferences';
+        prefMessage.infoName = 'column_prefs';
+        prefMessage.infoDomainId = this.problemListDS.mpage.prsnlId;
+        this.problemListDS.executeDmInfoAction('userPrefs', 'r', [prefMessage], function () {
+            // Check for user preferences and assign them
+            if (_this.problemListDS.isLoaded('userPrefs')) {
+                var LoadedConfig = JSON.parse(_this.problemListDS.get('userPrefs').dmInfo[0].longText);
+                _this.problemListDS = LoadedConfig.columnConfig;
+                _this.mPage.putLog("Loaded Preferences for " + _this.problemListDS.mpage.prsnlId + " " + JSON.stringify(_this.columnConfigProblemList));
+            }
+            _this.loadProblems();
+        });
+    };
+    ProblemListService.prototype.savePreferences = function () {
+        var _this = this;
+        this.mPage.putLog("Save Preferences for " + this.problemListDS.mpage.prsnlId + " " + JSON.stringify(this.problemListDS));
+        if (this.mPage.inMpage === true) {
+            this.problemListDS.executeDmInfoAction('saveUserPrefs', 'w', [
+                {
+                    infoDomain: 'COV ACH Patient List Preferences',
+                    infoName: 'column_prefs',
+                    infoDate: new Date(),
+                    infoChar: '',
+                    infoNumber: 0,
+                    infoLongText: JSON.stringify({
+                        columnConfig: this.columnConfigProblemList
+                    }),
+                    infoDomainId: this.problemListDS.mpage.prsnlId
+                }
+            ], function () {
+                _this._snackBar.open('Saved Preferences.', 'Ok', { duration: 1000 });
+            });
+        }
+        else {
+            this._snackBar.open('Preferences Would Be Saved', 'Close', { duration: 2000 });
+        }
     };
     Object.defineProperty(ProblemListService.prototype, "problems", {
         // Returns the problems data looking at the mPage or local JSON data
@@ -419,7 +467,7 @@ var ProblemListService = /** @class */ (function () {
         enumerable: false,
         configurable: true
     });
-    ProblemListService.ɵfac = function ProblemListService_Factory(t) { return new (t || ProblemListService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.CustomService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient)); };
+    ProblemListService.ɵfac = function ProblemListService_Factory(t) { return new (t || ProblemListService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.CustomService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_4__.MatSnackBar)); };
     ProblemListService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: ProblemListService, factory: ProblemListService.ɵfac, providedIn: 'root' });
     return ProblemListService;
 }());
@@ -443,9 +491,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../environments/environment */ 92340);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
 /* harmony import */ var _problem_list_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../problem-list.service */ 39650);
-/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/toolbar */ 64106);
-/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 1707);
+/* harmony import */ var _angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/snack-bar */ 68456);
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/toolbar */ 64106);
+/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ 1707);
+
 
 
 
@@ -453,13 +503,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var TopbarComponent = /** @class */ (function () {
-    function TopbarComponent(problemListDS) {
+    function TopbarComponent(problemListDS, _snackBar) {
         this.problemListDS = problemListDS;
+        this._snackBar = _snackBar;
         this.currentApplicationVersion = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.appVersion;
     }
     TopbarComponent.prototype.ngOnInit = function () {
     };
-    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService)); };
+    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService), _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_angular_material_snack_bar__WEBPACK_IMPORTED_MODULE_3__.MatSnackBar)); };
     TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 11, vars: 6, consts: [[2, "display", "flex", "justify-content", "space-between", "width", "100%"], [2, "width", "200px"], [3, "ngModel", "change"], [2, "flex-grow", "1"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-toolbar");
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "div", 0);
@@ -492,7 +543,7 @@ var TopbarComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleActiveSelected ? "Active Only" : "Showing All Problems", " ");
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate2"](" v", ctx.currentApplicationVersion, ";", ctx.problemListDS.userID, " ");
-        } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__.MatToolbar, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n\n.mat-toolbar[_ngcontent-%COMP%] {\n  height: 40px;\n  \n  display: flex;\n  \n  align-items: center;\n  \n  justify-content: space-between;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQjs7QUFBQTtFQUNJLFlBQUE7RUFBYyw2Q0FBQTtFQUNkLGFBQUE7RUFBZSxnQkFBQTtFQUNmLG1CQUFBO0VBQXFCLDRCQUFBO0VBQ3JCLDhCQUFBO0VBQWdDLDRCQUFBO0FBT3BDIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnRvb2xiYXIge1xuICAgIGZvbnQtc2l6ZTogMC44cmVtO1xufVxuLmFsaWduLXJpZ2h0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cblxuICAuc2VsZWN0ZWQge1xuICAgIGNvbG9yOiByZWQ7IC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGRlc2lyZWQgc3R5bGluZyBmb3IgdGhlIHNlbGVjdGVkIG1hdC1pY29uXG59XG5cbi5tYXQtYnV0dG9uLXRvZ2dsZS1jaGVja2VkIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1OyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbiAgICBjb2xvcjogd2hpdGU7IC8qIENoYW5nZSB0aGlzIHRvIHRoZSBjb2xvciB5b3Ugd2FudCBmb3IgdGhlIHRleHQvaWNvbiB3aGVuIHRoZSBidXR0b24gaXMgcHJlc3NlZCAqL1xufVxuXG4ubWF0LXRvb2xiYXIge1xuICAgIGhlaWdodDogNDBweDsgLyogQWRqdXN0IHRoaXMgdmFsdWUgdG8geW91ciBkZXNpcmVkIGhlaWdodCAqL1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIFVzZSBGbGV4Ym94ICovXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjsgLyogQ2VudGVyIGl0ZW1zIHZlcnRpY2FsbHkgKi9cbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8qIERpc3RyaWJ1dGUgaXRlbXMgZXZlbmx5ICovXG59XG4iXX0= */"] });
+        } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_4__.MatToolbar, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_5__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_6__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n\n.mat-toolbar[_ngcontent-%COMP%] {\n  height: 40px;\n  \n  display: flex;\n  \n  align-items: center;\n  \n  justify-content: space-between;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQjs7QUFBQTtFQUNJLFlBQUE7RUFBYyw2Q0FBQTtFQUNkLGFBQUE7RUFBZSxnQkFBQTtFQUNmLG1CQUFBO0VBQXFCLDRCQUFBO0VBQ3JCLDhCQUFBO0VBQWdDLDRCQUFBO0FBT3BDIiwiZmlsZSI6InRvcGJhci5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIlxuLnRvb2xiYXIge1xuICAgIGZvbnQtc2l6ZTogMC44cmVtO1xufVxuLmFsaWduLXJpZ2h0IHtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogZmxleC1lbmQ7XG4gIH1cblxuICAuc2VsZWN0ZWQge1xuICAgIGNvbG9yOiByZWQ7IC8vIFJlcGxhY2Ugd2l0aCB5b3VyIGRlc2lyZWQgc3R5bGluZyBmb3IgdGhlIHNlbGVjdGVkIG1hdC1pY29uXG59XG5cbi5tYXQtYnV0dG9uLXRvZ2dsZS1jaGVja2VkIHtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiAjM2Y1MWI1OyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbiAgICBjb2xvcjogd2hpdGU7IC8qIENoYW5nZSB0aGlzIHRvIHRoZSBjb2xvciB5b3Ugd2FudCBmb3IgdGhlIHRleHQvaWNvbiB3aGVuIHRoZSBidXR0b24gaXMgcHJlc3NlZCAqL1xufVxuXG4ubWF0LXRvb2xiYXIge1xuICAgIGhlaWdodDogNDBweDsgLyogQWRqdXN0IHRoaXMgdmFsdWUgdG8geW91ciBkZXNpcmVkIGhlaWdodCAqL1xuICAgIGRpc3BsYXk6IGZsZXg7IC8qIFVzZSBGbGV4Ym94ICovXG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjsgLyogQ2VudGVyIGl0ZW1zIHZlcnRpY2FsbHkgKi9cbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IC8qIERpc3RyaWJ1dGUgaXRlbXMgZXZlbmx5ICovXG59XG4iXX0= */"], changeDetection: 0 });
     return TopbarComponent;
 }());
 
@@ -863,7 +914,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.33","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.34","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
