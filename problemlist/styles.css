@@ -35730,6 +35730,10 @@ video {
   /* Adjust this value as needed */
 }
 
+.mat-icon {
+  font-size: 20px;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
