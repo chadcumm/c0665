@@ -448,23 +448,23 @@ var ProblemListService = /** @class */ (function () {
         });
     };
     ProblemListService.prototype.toggleMyProblems = function () {
-        this.MyProblems = !this.MyProblems;
-        this.mPage.putLog('toggleMyProblems this.MyProblems: ' + this.MyProblems);
+        this.problemViewPrefs.MyProblems = !this.problemViewPrefs.MyProblems;
+        this.mPage.putLog('toggleMyProblems this.problemViewPrefs.MyProblems: ' + this.problemViewPrefs.MyProblems);
     };
     ProblemListService.prototype.toggleActiveProblems = function () {
-        this.ActiveProblemsOnly = !this.ActiveProblemsOnly;
-        this.mPage.putLog('toggleActiveProblems this.ActiveProblemsOnly: ' + this.ActiveProblemsOnly);
+        this.problemViewPrefs.ActiveProblemsOnly = !this.problemViewPrefs.ActiveProblemsOnly;
+        this.mPage.putLog('toggleActiveProblems this.problemViewPrefs.ActiveProblemsOnly: ' + this.problemViewPrefs.ActiveProblemsOnly);
     };
-    Object.defineProperty(ProblemListService.prototype, "isToggleSelected", {
+    Object.defineProperty(ProblemListService.prototype, "isToggleMyProblemsSelected", {
         get: function () {
-            return this.MyProblems;
+            return this.problemViewPrefs.MyProblems;
         },
         enumerable: false,
         configurable: true
     });
     Object.defineProperty(ProblemListService.prototype, "isToggleActiveSelected", {
         get: function () {
-            return this.ActiveProblemsOnly;
+            return this.problemViewPrefs.ActiveProblemsOnly;
         },
         enumerable: false,
         configurable: true
@@ -548,9 +548,9 @@ var TopbarComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         } if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](7);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleSelected);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleMyProblemsSelected);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleSelected ? "My Problems Only" : "Showing All Providers", " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" ", ctx.problemListDS.isToggleMyProblemsSelected ? "My Problems Only" : "Showing All Providers", " ");
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleActiveSelected);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
@@ -928,7 +928,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.35","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.36","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
