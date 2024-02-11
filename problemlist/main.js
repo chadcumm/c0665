@@ -165,9 +165,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_routing_module__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./app-routing.module */ 90158);
 /* harmony import */ var _app_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./app.component */ 55041);
 /* harmony import */ var _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/material-moment-adapter */ 63737);
+/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
 /* harmony import */ var _angular_material_core__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/material/core */ 32220);
 /* harmony import */ var _problem_list_table_problem_list_table_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./problem-list-table/problem-list-table.component */ 62999);
 /* harmony import */ var _topbar_topbar_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./topbar/topbar.component */ 24989);
+
 
 
 
@@ -211,7 +213,8 @@ var AppModule = /** @class */ (function () {
                 _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
                 _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
                 _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
-                _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule
+                _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule,
+                _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_11__.MatSlideToggleModule
             ]] });
     return AppModule;
 }());
@@ -225,7 +228,8 @@ var AppModule = /** @class */ (function () {
         _app_routing_module__WEBPACK_IMPORTED_MODULE_0__.AppRoutingModule,
         _angular_forms__WEBPACK_IMPORTED_MODULE_10__.FormsModule,
         _angular_forms__WEBPACK_IMPORTED_MODULE_10__.ReactiveFormsModule,
-        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule] }); })();
+        _angular_material_moment_adapter__WEBPACK_IMPORTED_MODULE_7__.MatMomentDateModule,
+        _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_11__.MatSlideToggleModule] }); })();
 
 
 /***/ }),
@@ -295,6 +299,7 @@ var ProblemListService = /** @class */ (function () {
         this.problemListDS = problemListDS;
         this.mPage = mPage;
         this.http = http;
+        this.MyProblems = true;
         this.loading_data = false;
     }
     ProblemListService.prototype.loadProblems = function () {
@@ -316,7 +321,7 @@ var ProblemListService = /** @class */ (function () {
         }));
     };
     Object.defineProperty(ProblemListService.prototype, "problems", {
-        // Returns the problems data
+        // Returns the problems data looking at the mPage or local JSON data
         get: function () {
             var _a, _b;
             if (this.mPage.inMpage === true) {
@@ -369,6 +374,17 @@ var ProblemListService = /** @class */ (function () {
             _this.loading_data = false;
         });
     };
+    ProblemListService.prototype.toggleMyProblems = function () {
+        this.MyProblems = !this.MyProblems;
+        this.mPage.putLog('toggleMyProblems this.MyProblems: ' + this.MyProblems);
+    };
+    Object.defineProperty(ProblemListService.prototype, "isToggleSelected", {
+        get: function () {
+            return this.MyProblems;
+        },
+        enumerable: false,
+        configurable: true
+    });
     ProblemListService.ɵfac = function ProblemListService_Factory(t) { return new (t || ProblemListService)(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.CustomService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_clinicaloffice_clinical_office_mpage__WEBPACK_IMPORTED_MODULE_2__.mPageService), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵinject"](_angular_common_http__WEBPACK_IMPORTED_MODULE_3__.HttpClient)); };
     ProblemListService.ɵprov = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineInjectable"]({ token: ProblemListService, factory: ProblemListService.ɵfac, providedIn: 'root' });
     return ProblemListService;
@@ -391,26 +407,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TopbarComponent": function() { return /* binding */ TopbarComponent; }
 /* harmony export */ });
 /* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../environments/environment */ 92340);
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ 2316);
+/* harmony import */ var _problem_list_service__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../problem-list.service */ 39650);
+/* harmony import */ var _angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/material/toolbar */ 64106);
+/* harmony import */ var _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/material/slide-toggle */ 32080);
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ 1707);
+
+
+
+
 
 
 var TopbarComponent = /** @class */ (function () {
-    function TopbarComponent() {
+    function TopbarComponent(problemListDS) {
+        this.problemListDS = problemListDS;
         this.currentApplicationVersion = _environments_environment__WEBPACK_IMPORTED_MODULE_0__.environment.appVersion;
     }
     TopbarComponent.prototype.ngOnInit = function () {
     };
-    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(); };
-    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 3, vars: 1, consts: [[1, "align-right"], [1, "opacity-10", "italic"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](0, "div", 0);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementStart"](1, "div", 1);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtext"](2);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵelementEnd"]();
+    TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService)); };
+    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 6, vars: 2, consts: [[1, "topbar"], [3, "ngModel", "change"], [1, "spacer", 2, "width", "100%"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-toolbar", 0);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "mat-slide-toggle", 1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("change", function TopbarComponent_Template_mat_slide_toggle_change_1_listener() { return ctx.problemListDS.toggleMyProblems(); });
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](2, " My Problems Only ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelement"](3, "span", 2);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](4, "div", 3);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtext"](5);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementEnd"]();
         } if (rf & 2) {
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵadvance"](2);
-            _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵɵtextInterpolate1"](" v", ctx.currentApplicationVersion, " ");
-        } }, styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSiIsImZpbGUiOiJ0b3BiYXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi50b29sYmFyIHtcbiAgICBmb250LXNpemU6IDAuOHJlbTtcbn1cbi5hbGlnbi1yaWdodCB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICB9XG4iXX0= */"] });
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleSelected);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" v", ctx.currentApplicationVersion, " ");
+        } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__.MatToolbar, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQiIsImZpbGUiOiJ0b3BiYXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi50b29sYmFyIHtcbiAgICBmb250LXNpemU6IDAuOHJlbTtcbn1cbi5hbGlnbi1yaWdodCB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICB9XG5cbiAgLnNlbGVjdGVkIHtcbiAgICBjb2xvcjogcmVkOyAvLyBSZXBsYWNlIHdpdGggeW91ciBkZXNpcmVkIHN0eWxpbmcgZm9yIHRoZSBzZWxlY3RlZCBtYXQtaWNvblxufVxuXG4ubWF0LWJ1dHRvbi10b2dnbGUtY2hlY2tlZCB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNmNTFiNTsgLyogQ2hhbmdlIHRoaXMgdG8gdGhlIGNvbG9yIHlvdSB3YW50IHdoZW4gdGhlIGJ1dHRvbiBpcyBwcmVzc2VkICovXG4gICAgY29sb3I6IHdoaXRlOyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgZm9yIHRoZSB0ZXh0L2ljb24gd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbn1cbiJdfQ== */"] });
     return TopbarComponent;
 }());
 
@@ -781,7 +813,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"problemlist","version":"0.0.26","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"problemlist","version":"0.0.27","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=production","watch":"ng build --watch --configuration development","test":"ng test"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":"^3.6.25","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","autoprefixer":"^10.4.16","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","postcss":"^8.4.32","tailwindcss":"^2.2.19","typescript":"~4.2.3"}}');
 
 /***/ })
 
