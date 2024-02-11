@@ -3744,5 +3744,9 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
   size: 10pt;
   font-style: italic;
 }
+.mat-toolbar span {
+  font-size: 14px;
+  /* Adjust this value as needed */
+}
 
 /*# sourceMappingURL=styles.css.map*/
