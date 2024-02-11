@@ -324,14 +324,30 @@ var ProblemListService = /** @class */ (function () {
         // Returns the problems data looking at the mPage or local JSON data
         get: function () {
             var _a, _b;
+            var filteredProblemList = [];
             if (this.mPage.inMpage === true) {
-                console.log('problemListDS.get problemdata', this.problemListDS.get('problemdata'));
-                return this.problemListDS.get('problemdata').problemlist;
+                filteredProblemList = this.problemListDS.get('problemdata').problemlist;
             }
             else {
-                console.log('localJSONData', this.localJSONData);
-                return ((_b = (_a = this.localJSONData) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.problemlist) || [];
+                filteredProblemList = ((_b = (_a = this.localJSONData) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.problemlist) || [];
             }
+            return filteredProblemList;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(ProblemListService.prototype, "userID", {
+        // create a get function to return the userID from the mPage or local JSON data
+        get: function () {
+            var _a, _b;
+            var user = 0;
+            if (this.mPage.inMpage === true) {
+                user = this.problemListDS.get('problemdata').userID;
+            }
+            else {
+                user = ((_b = (_a = this.localJSONData) === null || _a === void 0 ? void 0 : _a[0]) === null || _b === void 0 ? void 0 : _b.userId) || '';
+            }
+            return user;
         },
         enumerable: false,
         configurable: true
@@ -428,7 +444,7 @@ var TopbarComponent = /** @class */ (function () {
     TopbarComponent.prototype.ngOnInit = function () {
     };
     TopbarComponent.ɵfac = function TopbarComponent_Factory(t) { return new (t || TopbarComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdirectiveInject"](_problem_list_service__WEBPACK_IMPORTED_MODULE_1__.ProblemListService)); };
-    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 6, vars: 2, consts: [[1, "topbar"], [3, "ngModel", "change"], [1, "spacer", 2, "width", "100%"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
+    TopbarComponent.ɵcmp = /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵdefineComponent"]({ type: TopbarComponent, selectors: [["app-topbar"]], decls: 6, vars: 3, consts: [[1, "topbar"], [3, "ngModel", "change"], [1, "spacer", 2, "width", "100%"], [1, "smallHidden"]], template: function TopbarComponent_Template(rf, ctx) { if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](0, "mat-toolbar", 0);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵelementStart"](1, "mat-slide-toggle", 1);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵlistener"]("change", function TopbarComponent_Template_mat_slide_toggle_change_1_listener() { return ctx.problemListDS.toggleMyProblems(); });
@@ -443,7 +459,7 @@ var TopbarComponent = /** @class */ (function () {
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngModel", ctx.problemListDS.isToggleSelected);
             _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](4);
-            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate1"](" v", ctx.currentApplicationVersion, " ");
+            _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵtextInterpolate2"](" v", ctx.currentApplicationVersion, ";", ctx.problemListDS.userID, " ");
         } }, directives: [_angular_material_toolbar__WEBPACK_IMPORTED_MODULE_3__.MatToolbar, _angular_material_slide_toggle__WEBPACK_IMPORTED_MODULE_4__.MatSlideToggle, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgControlStatus, _angular_forms__WEBPACK_IMPORTED_MODULE_5__.NgModel], styles: [".toolbar[_ngcontent-%COMP%] {\n  font-size: 0.8rem;\n}\n\n.align-right[_ngcontent-%COMP%] {\n  display: flex;\n  justify-content: flex-end;\n}\n\n.selected[_ngcontent-%COMP%] {\n  color: red;\n}\n\n.mat-button-toggle-checked[_ngcontent-%COMP%] {\n  background-color: #3f51b5;\n  \n  color: white;\n  \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInRvcGJhci5jb21wb25lbnQuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFDQTtFQUNJLGlCQUFBO0FBQUo7O0FBRUE7RUFDSSxhQUFBO0VBQ0EseUJBQUE7QUFDSjs7QUFFRTtFQUNFLFVBQUE7QUFDSjs7QUFFQTtFQUNJLHlCQUFBO0VBQTJCLGlFQUFBO0VBQzNCLFlBQUE7RUFBYyxtRkFBQTtBQUdsQiIsImZpbGUiOiJ0b3BiYXIuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJcbi50b29sYmFyIHtcbiAgICBmb250LXNpemU6IDAuOHJlbTtcbn1cbi5hbGlnbi1yaWdodCB7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IGZsZXgtZW5kO1xuICB9XG5cbiAgLnNlbGVjdGVkIHtcbiAgICBjb2xvcjogcmVkOyAvLyBSZXBsYWNlIHdpdGggeW91ciBkZXNpcmVkIHN0eWxpbmcgZm9yIHRoZSBzZWxlY3RlZCBtYXQtaWNvblxufVxuXG4ubWF0LWJ1dHRvbi10b2dnbGUtY2hlY2tlZCB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogIzNmNTFiNTsgLyogQ2hhbmdlIHRoaXMgdG8gdGhlIGNvbG9yIHlvdSB3YW50IHdoZW4gdGhlIGJ1dHRvbiBpcyBwcmVzc2VkICovXG4gICAgY29sb3I6IHdoaXRlOyAvKiBDaGFuZ2UgdGhpcyB0byB0aGUgY29sb3IgeW91IHdhbnQgZm9yIHRoZSB0ZXh0L2ljb24gd2hlbiB0aGUgYnV0dG9uIGlzIHByZXNzZWQgKi9cbn1cbiJdfQ== */"] });
     return TopbarComponent;
 }());
