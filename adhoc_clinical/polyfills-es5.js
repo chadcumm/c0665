@@ -3949,7 +3949,7 @@ function patchPrototype(prototype, fnNames) {
       var prototypeDesc = ObjectGetOwnPropertyDescriptor(prototype, name);
 
       if (!isPropertyWritable(prototypeDesc)) {
-        return "continue";
+        return 1; // continue
       }
 
       prototype[name] = function (delegate) {
@@ -3964,9 +3964,7 @@ function patchPrototype(prototype, fnNames) {
   };
 
   for (var i = 0; i < fnNames.length; i++) {
-    var _ret = _loop();
-
-    if (_ret === "continue") continue;
+    if (_loop()) continue;
   }
 }
 

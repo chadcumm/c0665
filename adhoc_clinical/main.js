@@ -205,7 +205,7 @@ function AppComponent_div_1_Template(rf, ctx) { if (rf & 1) {
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx_r1.ready);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](1);
-    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("disabled", ctx_r1.encounterInProcess);
+    _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("disabled", ctx_r1.encounterRunOnce);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](2);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵproperty"]("ngIf", ctx_r1.encounterCreated || ctx_r1.encounterInProcess);
     _angular_core__WEBPACK_IMPORTED_MODULE_2__["ɵɵadvance"](3);
@@ -236,11 +236,13 @@ var AppComponent = /** @class */ (function () {
         };
         this.encounterCreated = false;
         this.encounterInProcess = false;
+        this.encounterRunOnce = false;
     }
     //title: string = "adhoc_clinical"
     AppComponent.prototype.createEncounter = function (event) {
         this.mPage.putLog("createEncounter Clicked");
         this.encounterInProcess = true;
+        this.encounterRunOnce = true;
         //this.mPage.putLog(JSON.stringify(this.prompts))
         this.callCreateEncounter();
         /*
@@ -637,6 +639,8 @@ var map = {
 	"./ar-ly.js": 66680,
 	"./ar-ma": 92178,
 	"./ar-ma.js": 92178,
+	"./ar-ps": 42060,
+	"./ar-ps.js": 42060,
 	"./ar-sa": 56522,
 	"./ar-sa.js": 56522,
 	"./ar-tn": 95682,
@@ -771,6 +775,8 @@ var map = {
 	"./ko": 47148,
 	"./ko.js": 47148,
 	"./ku": 27752,
+	"./ku-kmr": 63898,
+	"./ku-kmr.js": 63898,
 	"./ku.js": 27752,
 	"./ky": 65675,
 	"./ky.js": 65675,
@@ -927,7 +933,7 @@ webpackContext.id = 46700;
 /***/ (function(module) {
 
 "use strict";
-module.exports = JSON.parse('{"name":"adhoc_clinical","version":"0.0.15","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=development","watch":"ng build --watch --configuration development","test":"ng test","postinstall":"node ./decorate-angular-cli.js"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/flex-layout":"^12.0.0-beta.35","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":">3.1.6","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@nrwl/cli":"12.10.1","@nrwl/nx-cloud":"12.5.4","@nrwl/tao":"12.10.1","@nrwl/workspace":"12.10.1","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
+module.exports = JSON.parse('{"name":"adhoc_clinical","version":"0.0.16","scripts":{"ng":"ng","start":"ng serve","prebuild":"npm --no-git-tag-version version patch","build":"ng build --configuration=development","watch":"ng build --watch --configuration development","test":"ng test","postinstall":"node ./decorate-angular-cli.js"},"private":true,"dependencies":{"@angular-devkit/build-angular":"^12.2.17","@angular/animations":"^12.2.16","@angular/cdk":"^12.2.13","@angular/cli":"^12.2.17","@angular/common":"^12.2.16","@angular/compiler":"^12.2.16","@angular/core":"^12.2.16","@angular/flex-layout":"^12.0.0-beta.35","@angular/forms":"^12.2.16","@angular/material":"^12.2.13","@angular/material-moment-adapter":"^12.2.13","@angular/platform-browser":"^12.2.16","@angular/platform-browser-dynamic":"^12.2.16","@angular/router":"^12.2.16","@clinicaloffice/clinical-office-mpage":">3.1.6","classlist.js":"^1.1.20150312","fast-sort":"^3.2.0","iframe-resizer":"^4.3.6","moment":"^2.29.1","rxjs":"~6.6.0","tslib":"^2.1.0","zone.js":"~0.11.4"},"devDependencies":{"@angular/compiler-cli":"^12.2.16","@nrwl/cli":"12.10.1","@nrwl/nx-cloud":"12.5.4","@nrwl/tao":"12.10.1","@nrwl/workspace":"12.10.1","@types/jasmine":"~3.6.0","@types/node":"^12.20.37","jasmine-core":"~3.7.0","karma":"^6.3.9","karma-chrome-launcher":"~3.1.0","karma-coverage":"~2.0.3","karma-jasmine":"~4.0.0","karma-jasmine-html-reporter":"~1.5.0","typescript":"~4.2.3"}}');
 
 /***/ })
 
